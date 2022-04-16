@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        border: none;
+    }
+
+    body {
+        height: 100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTMyfHxiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60);
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size : cover;
+        overflow: hidden;
+      }
+
+    .shell {
+        width: 300px;
+        height: 350px;
+        padding:50px
+        ;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        /* 给最外层加透视，否则没有翻转效果 */
+        perspective: 1000px;
+    }
+
+    .top {
+        width: 300px;
+        display: flex;
+        cursor: pointer;
+        justify-content: space-evenly;
+    }
+
+    .off,
+    .on {
+        color: white;
+        transition: .5s;
+        font: 300 20px '';
+    }
+
+    .on {
+        opacity: .5;
+    }
+
+    .button {
+        width: 60px;
+        height: 25px;
+        background-color: rgb(255, 235, 167);
+        border-radius: 20px;
+        position: relative;
+    }
+
+    .ball {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        background-color: rgb(46, 45, 46);
+        border-radius: 50%;
+        transition: .5s;
+        box-shadow: 0 0 10px black;
+        left: 0;
+        transform: translate(-1px);
+    }
+
+    .bottom {
+        width: 300px;
+        height: 250px;
+        background-image: url(https://bucketoelliot.oss-cn-chengdu.aliyuncs.com/img/loginbackground.png);
+        transform-style: preserve-3d;
+        /* 3D效果 */
+        position: relative;
+        transition: 1s;
+        border-radius: 5px;
+    }
+
+    .bottom>div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .bottom>div h2 {
+        color: white;
+    }
+
+    .bottom>div input {
+        width: 200px;
+        height: 25px;
+        padding: 0px 10px;
+        background-color: rgb(21, 14, 14);
+        border-radius: 5px;
+        color: white;
+    }
+
+    .bottom>div button {
+        width: 80px;
+        height: 30px;
+        color: #333;
+        font-size: 15px;
+        background-color: rgb(255, 235, 167);
+        border-radius: 4px;
+        transition: 0.3s;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    .bottom>div button:hover {
+        box-shadow: 0 0 10px rgb(255, 235, 167);
+    }
+
+    .signUp {
+        transform: translateZ(70px);
+    }
+
+    .signIn {
+        position: absolute;
+        top: 0;
+        transform: translateZ(-70px) rotateY(180deg);
+    }
+    .statemt {
+        color:white;
+        font-size:small;  
+    }
+    .statemt a:link {
+        padding: 10px 0px;
+        color:rgb(42, 106, 232);
+        text-decoration: none;
+        text-shadow: 0px 0px 1px rgb(68, 116, 205);
+    }
+    
+    
+</style>
+
+<body>
+    <div class="shell">
+        <div class="top">
+            <span class="off">SIGN UP</span>
+            <div class="button">
+                <div class="ball"></div>
+            </div>
+            <span class="on">SIGN IN</span>
+        </div>
+
+        <div class="bottom">
+            
+            <div class="signUp">
+                <h2>注册</h2>
+                <input type="text" placeholder="手机号">
+                <input type="text" placeholder="密码">
+                <input type="text" placeholder="确认密码">
+                <button>GO</button>
+                <h5 class="statemt">注册即代表已阅读并同意 <a href="../pages/statement.html">服务协议</a></h5>
+            </div>
+
+            <div class="signIn">
+                <h2>登录</h2>
+                <input type="text" placeholder="手机号">
+                <input type="text" placeholder="密码">
+                <button>GO</button>
+            </div>
+        </div>
+
+    </div>
+    <!-- script部分 -->
+    <script>
+        let button = document.querySelector('.button')
+        let ball = document.querySelector('.ball')
+        let bottom = document.querySelector('.bottom')
+        let off = document.querySelector('.off')
+        let on = document.querySelector('.on')
+        let index = 0
+        button.addEventListener('click', () => {
+            if (index == 0) {
+                index = 1
+                ball.style.left = 61 + '%'
+                on.style.opacity = 1
+                off.style.opacity = 0.5
+                bottom.style.transform = "rotateY(180deg)"
+            } else {
+                index = 0
+                ball.style.left = 0 + '%'
+                on.style.opacity = 0.5
+                off.style.opacity = 1
+                bottom.style.transform = "rotateY(0)"
+            }
+        })
+    </script>
+</body>
+
+</html>
