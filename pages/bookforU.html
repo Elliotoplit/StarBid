@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纯CSS实现翻书动画</title>
+    <style>
+        * {
+            /* 初始化 */
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* 100%的窗口高度 */
+            height: 100vh;
+            /* 弹性布局，水平+垂直居中 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: antiquewhite;
+        }
+
+        .book {
+            width: 300px;
+            height: 400px;
+            background-color: aliceblue;
+            /* 开启 3d效果 */
+            transform-style: preserve-3d;
+            /* 设置视距 */
+            perspective: 2000px;
+            /* 设置阴影 */
+            box-shadow: inset 300px 0 30px rgba(0, 0, 0, 0.2),
+                0 10px 100px rgba(0, 0, 0, 0.3);
+            /* 动画过渡 */
+            transition: 1s;
+        }
+
+        .book:hover {
+            transform: rotate(-10deg);
+            box-shadow: inset 20px 0 30px rgba(0, 0, 0, 0.2),
+                0 10px 100px rgba(0, 0, 0, 0.3);
+        }
+
+        .book::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: -5px;
+            width: 100%;
+            height: 5px;
+            background-color: #bc5050;
+            /* 设置旋转元素基点位置 */
+            transform-origin: bottom;
+            /* 沿X轴倾斜-45度 */
+            transform: skew(-45deg);
+
+        }
+
+        .book::after {
+            content: "";
+            position: absolute;
+            right: -5px;
+            top: 0px;
+            width: 5px;
+            height: 100%;
+            background-color: #bc5050;
+            /* 设置旋转元素基点位置 */
+            transform-origin: left;
+            /* 沿 Y轴倾斜-45度 */
+            transform: skewY(-45deg);
+        }
+
+        /* 封面 */
+        .book .cover {
+            width: 100%;
+            height: 100%;
+            background-color: #e89e92;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transform-origin: left;
+            transition: 1s;
+        }
+
+        .book .cover span {
+            position: absolute;
+            right: 30px;
+            top: 30px;
+            background-color: #fff;
+            font-size: 40px;
+            font-family: "隶书";
+            /* 竖向文本 */
+            writing-mode: vertical-lr;
+            padding: 10px 5px 5px;
+            /* 字间距 */
+            letter-spacing: 8px;
+        }
+
+        .book:hover .cover {
+            transform: rotateY(-135deg);
+        }
+
+        .book .content {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: -1;
+            font-size: 40px;
+            font-family: "隶书";
+            line-height: 50px;
+            letter-spacing: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .book .content .img {
+            display: flex;
+        }
+        .smallone {
+            height: 205px;
+        }
+        .bigone {
+            height: 270px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="book">
+        <div class="cover">
+            <span>小雨的宝藏</span>
+        </div>
+        <div class="content">
+            <p>当然是小豪</p>
+            <div class="img">
+                <img class="smallone" src="https://bucketoelliot.oss-cn-chengdu.aliyuncs.com/img/bjyounghao.png" alt="小豪加载失败">
+                <img class="bigone" src="https://bucketoelliot.oss-cn-chengdu.aliyuncs.com/img/yshao.png" alt="小豪加载失败">
+            </div>
+
+
+        </div>
+    </div>
+</body>
+
+</html>
